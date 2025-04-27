@@ -4,5 +4,5 @@ from django.shortcuts import render, redirect, HttpResponse
 
 
 def index(request):
-    print("push test")
+    print("gitee push test")
     return render(request, 'index.html')
