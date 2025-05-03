@@ -4,5 +4,5 @@ from django.shortcuts import render, redirect, HttpResponse
 
 
 def index(request):
-
+    """首页"""
     return render(request, 'index.html')
