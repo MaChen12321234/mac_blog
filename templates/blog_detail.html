@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block context %}
+    <h1>Django课程详情</h1>
+    <hr>
+    <div class="mt-2">
+        < img src="{% static 'img/wallhaven-3z8y59.webp' %}" class="rounded-circle" alt="" height="30px" width="30px">
+        <span class="ms-2">马晨</span>
+        <span class="ms-2">于</span>
+        <span class="ms-2">2024年3月29日 11：28</span>发布
+    </div>
+    <hr>
+    <div class="py-2">
+        这是博客详情
+    </div>
+    <hr>
+    <div class="mt-2">
+        <h3>评论(10)</h3>
+        <form action="" method="post">
+            <div class="mt-2">
+                <input type="text" class="form-control" placeholder="请输入评论">
+            </div>
+            <div class="text-end mt-2">
+                <button type="button" class="btn btn-primary">这是评论</button>
+            </div>
+        </form>
+    </div>
+    <div class="mt-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" >
+                <div class="d-flex justify-content-between text-body-tertiary">
+                    <div class="user-info">
+                        <img src="{% static 'img/wallhaven-3z8y59.webp' %}" class="rounded-circle" alt="" height="40px" width="40px">
+                        <span class="mt-2">马晨</span>
+                    </div>
+                    <div class="create-time" style="line-height: 40px ">2024年3月29日 11：28</div>
+                </div>
+                <div class="mt-2">这博客写的不错，学到了</div>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
