@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "blog.apps.BlogConfig"
+    "blog.apps.BlogConfig",
+    "zl_auth.apps.ZlAuthConfig",
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,12 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 邮箱配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.aliyun.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'chen.ma@aliyun.com'
+EMAIL_HOST_PASSWORD = 'mc0916god'
+DEFAULT_FROM_EMAIL = 'chen.ma@aliyun.com'
