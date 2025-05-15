@@ -41,7 +41,7 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-secondary">首页</a></li>
+                <li><a href="/" class="nav-link px-2 text-secondary">首页</a></li>
                 <li><a href="{% url 'blog:blog_pub' %}" class="nav-link px-2 text-secondary">发布博客</a></li>
             </ul>
 
@@ -49,10 +49,22 @@
                 <input type="search" class="form-control" placeholder="搜索" aria-label="Search">
             </form>
 
-            <div class="text-end">
-                <button href="/auth/login/" type="button" class="btn btn-outline-primary me-2">登录</button>
-                <button type="button" class="btn btn-primary">注册</button>
-            </div>
+            {% if user.is_authenticated %}
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <img src="{% static 'img/wallhaven-3z8y59.webp' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" style="">
+                        <li><a class="dropdown-item" href="{% url 'zl_auth:logout' %}">退出登录</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="text-end">
+                    <a href="{% url 'zl_auth:login' %}" type="button" class="btn btn-outline-primary me-2">登录</a>
+                    <a href="{% url 'zl_auth:register' %}" type="button" class="btn btn-primary">注册</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </header>
