@@ -1,10 +1,12 @@
+from lib2to3.fixes.fix_input import context
+
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, HttpResponse, reverse
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import title
 from django.urls import reverse_lazy
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 from scrapy.http import JsonRequest
 from unicodedata import category
 from .models import BlogCategory, BlogContext, BlogComment
@@ -37,8 +39,24 @@ def blog_pub(request):
             blog = BlogContext.objects.create(title=title, content=content, category_id=category_id, author=request.user)
             return JsonResponse({"code": 200, "message": "博客发布成功！", "data": {"blog_id": blog.id}})
         else:
+            print(form.cleaned_data.get('content'))
             print(form.errors)
-            return JsonResponse({'code': 400, "message": "参数错误！"})
+            return JsonResponse({'code': 400, "message": "参数错误！", "data": form.errors})
 
 def blog_detail(request, bid):
-    return render(request, 'blog_detail.html', {'bid': bid})
+    try:
+        blog = BlogContext.objects.get(pk=bid)
+    except Exception as e:
+        blog = None
+    return render(request, 'blog_detail.html', context={"blog": blog})
+
+
+@require_POST
+@login_required()
+def pub_comment(request):
+    blog_id = request.POST.get('blog_id')
+    content = request.POST.get('content')
+    BlogComment.objects.create(blog_id=blog_id, content=content, author=request.user)
+
+    # 重定向至博客详情
+    return redirect(reverse('blog:blog_detail', kwargs={'blog_id': blog_id}))

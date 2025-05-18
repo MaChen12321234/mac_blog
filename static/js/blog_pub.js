@@ -32,7 +32,7 @@ window.onload = function () {
 
         let title = $("input[name='title']").val();
         let category = $("#category-select").val();
-        let content = editor.getHtml();
+        let content = editor.getHtml()
         let csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
         $.ajax('/blog/pub', {
             method: 'POST',
